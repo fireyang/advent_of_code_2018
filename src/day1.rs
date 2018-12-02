@@ -1,4 +1,3 @@
-
 mod day1 {
     use std::collections::HashSet;
 
@@ -17,18 +16,21 @@ mod day1 {
 
     #[allow(dead_code)]
     pub fn puzzle2(vec: Vec<String>) -> i32 {
-        let mut current:i32 = 0;
-        let vec2 : Vec<i32>= vec.iter().map(|value|value.parse::<i32>().unwrap()).collect();
+        let mut current: i32 = 0;
+        let vec2: Vec<i32> = vec
+            .iter()
+            .map(|value| value.parse::<i32>().unwrap())
+            .collect();
         let mut frequency_set: HashSet<i32> = HashSet::new();
-        while !frequency_set.contains(&current){
+        while !frequency_set.contains(&current) {
             for x in vec2.iter() {
                 frequency_set.insert(current);
                 current += x;
                 // println!("current,add,{:?},{:?}", x,current);
-                if frequency_set.contains(&current){
+                if frequency_set.contains(&current) {
                     break;
                 }
-            };
+            }
         }
         return current;
     }
