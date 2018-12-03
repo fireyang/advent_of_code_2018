@@ -36,13 +36,10 @@ mod day2 {
         let mut max_tumple = (0usize, 0usize);
         for (i, x) in vec.iter().enumerate() {
             for (j, y) in vec[i + 1..].iter().enumerate() {
-                let l = x.chars()
-                    .zip(y.chars())
-                    .filter(|(s1,s2)| s1 == s2)
-                    .count();
+                let l = x.chars().zip(y.chars()).filter(|(s1, s2)| s1 == s2).count();
                 if max < l {
                     max = l;
-                    max_tumple = (i, i+1+j);
+                    max_tumple = (i, i + 1 + j);
                 }
             }
         }
@@ -50,9 +47,10 @@ mod day2 {
         let str1 = vec.get(i).unwrap();
         let str2 = vec.get(j).unwrap();
         // println!("out2:{:?}, {:?}", str1, str2);
-        str1.chars().zip(str2.chars())
-            .filter(|(s1,s2)| s1 == s2)
-            .map(|(s,_)| s)
+        str1.chars()
+            .zip(str2.chars())
+            .filter(|(s1, s2)| s1 == s2)
+            .map(|(s, _)| s)
             .collect()
     }
 }
