@@ -32,30 +32,23 @@ mod day2 {
 
     #[allow(dead_code)]
     pub fn part2(vec: Vec<String>) -> String {
-        // let h: HashMap<
-        // let vec2 = vec![Box::new(Item)];
         let mut max = 0usize;
         let mut r_str: String = String::new();
         for (i, x) in vec.iter().enumerate() {
             for y in vec[i + 1..].iter() {
-                // let mut count = 0i32;
                 let mut vec2: Vec<char> = vec![];
                 for (s1, s2) in x.chars().zip(y.chars()) {
                     if s1 == s2 {
                         vec2.push(s1);
-                        // count += 1;
                     }
                 }
                 if max < vec2.len() {
                     max = vec2.len();
-                    // println!("out1,{:?}", vec2);
-                    r_str = vec2.iter().collect::<String>();
+                    // r_str = vec2.iter().collect::<String>();
+                    r_str = vec2.iter().collect();
                 }
-                // vec2.push(Box::new(Item.new(i,j, count)));
             }
         }
-        // println!("out,{:?}", rStr);
-        // "".to_string()
         r_str
     }
 }
@@ -63,6 +56,7 @@ mod day2 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::common;
 
     fn parse_from_str(val: &str) -> Vec<String> {
         val.split_whitespace()
@@ -85,7 +79,7 @@ mod tests {
         let r = day2::part1(list);
         // println!("test,{:?}", list);
         assert_eq!(r, 12);
-        let list2 = crate::parse_from_file("./data/day2_part1.txt");
+        let list2 = common::parse_from_file("./data/day2_part1.txt");
         let r2 = day2::part1(list2.unwrap());
         assert_eq!(r2, 8610);
     }
@@ -104,7 +98,7 @@ mod tests {
         let list: Vec<String> = parse_from_str(s);
         let r = day2::part2(list);
         assert_eq!(r, "fgij");
-        let list2 = crate::parse_from_file("./data/day2_part2.txt");
+        let list2 = common::parse_from_file("./data/day2_part2.txt");
         let r2 = day2::part2(list2.unwrap());
         assert_eq!(r2, "iosnxmfkpabcjpdywvrtahluy");
     }
