@@ -33,23 +33,27 @@ mod day2 {
     #[allow(dead_code)]
     pub fn part2(vec: Vec<String>) -> String {
         let mut max = 0usize;
-        let mut r_str: String = String::new();
+        let mut max_tumple = (0usize, 0usize);
         for (i, x) in vec.iter().enumerate() {
-            for y in vec[i + 1..].iter() {
-                let mut vec2: Vec<char> = vec![];
-                for (s1, s2) in x.chars().zip(y.chars()) {
-                    if s1 == s2 {
-                        vec2.push(s1);
-                    }
-                }
-                if max < vec2.len() {
-                    max = vec2.len();
-                    // r_str = vec2.iter().collect::<String>();
-                    r_str = vec2.iter().collect();
+            for (j, y) in vec[i + 1..].iter().enumerate() {
+                let l = x.chars()
+                    .zip(y.chars())
+                    .filter(|(s1,s2)| s1 == s2)
+                    .count();
+                if max < l {
+                    max = l;
+                    max_tumple = (i, i+1+j);
                 }
             }
         }
-        r_str
+        let (i, j) = max_tumple;
+        let str1 = vec.get(i).unwrap();
+        let str2 = vec.get(j).unwrap();
+        // println!("out2:{:?}, {:?}", str1, str2);
+        str1.chars().zip(str2.chars())
+            .filter(|(s1,s2)| s1 == s2)
+            .map(|(s,_)| s)
+            .collect()
     }
 }
 
