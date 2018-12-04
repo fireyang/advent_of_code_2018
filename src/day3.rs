@@ -44,8 +44,8 @@ mod day3 {
     #[allow(dead_code)]
     pub fn part2(list: Vec<Box<Claim>>) -> i32 {
         let mut h: HashMap<(i32, i32), i32> = HashMap::new();
-        let mut  ok_set: HashSet<i32> = HashSet::new();
-        for c in list.iter(){
+        let mut ok_set: HashSet<i32> = HashSet::new();
+        for c in list.iter() {
             let mut is_over = false;
             for p in c.points().iter() {
                 match h.get(p) {
@@ -54,11 +54,14 @@ mod day3 {
                         ok_set.remove(cid);
                         is_over = true;
                         ()
-                    },
-                    None => {h.insert(*p, c.id);()}
+                    }
+                    None => {
+                        h.insert(*p, c.id);
+                        ()
+                    }
                 }
             }
-            if !is_over{
+            if !is_over {
                 ok_set.insert(c.id);
             }
         }
@@ -95,8 +98,10 @@ mod tests {
             .map(|x| x.trim())
             .filter(|&x| x.len() != 0)
             .collect();
-        let claim_vec: Vec<Box<Claim>> =
-            str_vec.iter().map(|&x| parse_claim(x.to_string())).collect();
+        let claim_vec: Vec<Box<Claim>> = str_vec
+            .iter()
+            .map(|&x| parse_claim(x.to_string()))
+            .collect();
         claim_vec
     }
 
