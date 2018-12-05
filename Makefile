@@ -12,3 +12,5 @@ day3:
 	cargo test -- --nocapture day3::
 day4:
 	cargo test -- --nocapture day4::
+day5:
+	cargo test -- --nocapture day5::
