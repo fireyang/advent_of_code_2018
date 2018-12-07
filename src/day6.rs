@@ -39,7 +39,7 @@ mod day6 {
 
     #[allow(dead_code)]
     pub fn part1(points: Vec<(i32, i32)>) -> i32 {
-        let coordinates : Vec<Coordinate>= points
+        let coordinates: Vec<Coordinate> = points
             .iter()
             .enumerate()
             .map(|(id, (x, y))| Coordinate {
@@ -50,12 +50,13 @@ mod day6 {
             .collect();
         let mut map = HashMap::new();
         let mut count_map = HashMap::new();
-        let mut infinites =  vec![];
+        let mut infinites = vec![];
         for c in coordinates.iter() {
             let step = coordinates
                 .iter()
                 .map(|c2| (c.x - c2.x).abs() + (c.y - c2.y).abs())
-                .max().unwrap();
+                .max()
+                .unwrap();
             let vec = get_cycle_points(step);
 
             // println!("step, {:?}", (c, step));
@@ -65,8 +66,8 @@ mod day6 {
                 let px = *x + c.x;
                 let py = *y + c.y;
                 // if px < 0 || py < 0 {
-                    // is_infinite = true;
-                    // continue;
+                // is_infinite = true;
+                // continue;
                 // }
                 let pos2 = (px, py);
                 let dis1 = x.abs() + y.abs();
@@ -83,8 +84,8 @@ mod day6 {
                     }
                 }
 
-                if can_insert{
-                    if dis1 == step{
+                if can_insert {
+                    if dis1 == step {
                         is_infinite = true;
                     }
                     if px < 0 || py < 0 {
@@ -94,9 +95,9 @@ mod day6 {
                     map.insert(pos2, (c.id, dis1));
                 }
             }
-            if is_infinite{
+            if is_infinite {
                 infinites.push(c.id);
-            }else{
+            } else {
                 count_map.insert(c.id, count);
             }
         }

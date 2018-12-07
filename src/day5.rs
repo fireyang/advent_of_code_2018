@@ -2,9 +2,9 @@ mod day5 {
     extern crate regex;
     use std::collections::LinkedList;
     // use std::collections::HashMap;
-    use std::collections::HashSet;
     use regex::Regex;
     use std::char;
+    use std::collections::HashSet;
 
     fn check_react(a: char, b: &char) -> bool {
         // println!("{:?}",(a, b, a.eq_ignore_ascii_case(b), (a != *b)));
@@ -39,7 +39,7 @@ mod day5 {
 
     pub fn scan_letter(input: &String) -> HashSet<char> {
         let mut ch_set = HashSet::new();
-        input.to_lowercase().chars().for_each(|ch|{
+        input.to_lowercase().chars().for_each(|ch| {
             ch_set.insert(ch);
         });
         ch_set
@@ -48,12 +48,15 @@ mod day5 {
     #[allow(dead_code)]
     pub fn part2(input: String) -> i32 {
         let input_set = scan_letter(&input);
-        let v = input_set.iter().map(|ch|{
-            let s = remove_type_unit(&input, ch);
-            let o = part1(s);
-            // println!("{:?}", (ch, o));
-            o
-        }).min();
+        let v = input_set
+            .iter()
+            .map(|ch| {
+                let s = remove_type_unit(&input, ch);
+                let o = part1(s);
+                // println!("{:?}", (ch, o));
+                o
+            })
+            .min();
         v.unwrap()
     }
 }
