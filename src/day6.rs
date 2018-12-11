@@ -51,11 +51,13 @@ mod day6 {
     #[allow(dead_code)]
     pub fn part2(points: Vec<(i32, i32)>, limit: i32) -> i32 {
         let l = points.len() as i32;
-        let (x, y) = points.iter().fold((0, 0), |acc, (x, y)| (acc.0+x, acc.1 +y));
-        let (x1, y1) = (x/l, y/l);
-        let r = points.iter().fold(0, |acc, (x, y)|{
-            acc + (x - x1).abs() + (y - y1).abs()
-        });
+        let (x, y) = points
+            .iter()
+            .fold((0, 0), |acc, (x, y)| (acc.0 + x, acc.1 + y));
+        let (x1, y1) = (x / l, y / l);
+        let r = points
+            .iter()
+            .fold(0, |acc, (x, y)| acc + (x - x1).abs() + (y - y1).abs());
         println!("{:?}", (x1, y1, r));
         let mut step = 1;
         let mut count = 1;
@@ -63,25 +65,24 @@ mod day6 {
             let vec = get_round_points(step);
             let mut add = false;
             vec.iter().for_each(|pos| {
-                let px = pos.0 + x1 ;
-                let py = pos.1 + y1 ;
-                let s1 = points.iter().fold(0, |acc, (x, y)|{
-                    acc + (x - px).abs() + (y - py).abs()
-                });
-                if s1 < limit{
+                let px = pos.0 + x1;
+                let py = pos.1 + y1;
+                let s1 = points
+                    .iter()
+                    .fold(0, |acc, (x, y)| acc + (x - px).abs() + (y - py).abs());
+                if s1 < limit {
                     add = true;
-                    count +=1;
+                    count += 1;
                 }
             });
             if add {
-                step +=1;
-            }else{
-                step =0;
+                step += 1;
+            } else {
+                step = 0;
             }
         }
 
         println!("count:{:?}", count);
-
 
         // for p in points.iter() {
         //
@@ -107,7 +108,7 @@ mod day6 {
         for c in coordinates.iter() {
             let step = coordinates
                 .iter()
-                .map(|c2| ((c.x - c2.x).abs() + (c.y - c2.y).abs()/ 2))
+                .map(|c2| ((c.x - c2.x).abs() + (c.y - c2.y).abs() / 2))
                 .max()
                 .unwrap();
             let vec = get_cycle_points(step);
