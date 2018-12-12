@@ -24,3 +24,5 @@ day10:
 	cargo test -- --nocapture day10::
 day11:
 	cargo test -- --nocapture day11::
+day12:
+	cargo test -- --nocapture day12::

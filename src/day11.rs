@@ -1,5 +1,5 @@
 mod day11 {
-    use std::collections::HashSet;
+    // use std::collections::HashSet;
     // use std::num::Float;
 
     #[allow(dead_code)]
@@ -75,7 +75,7 @@ mod day11 {
 mod tests {
 
     use super::*;
-    use crate::common;
+    // use crate::common;
 
     #[test]
     fn day11_part1() {
