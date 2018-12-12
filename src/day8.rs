@@ -11,6 +11,21 @@ mod day8 {
             let child = self.children.iter().map(|c| c.total()).sum::<i32>();
             self.metas.iter().sum::<i32>() + child
         }
+
+        pub fn total1(&self) -> i32 {
+            if self.children.len() == 0 {
+                return self.metas.iter().sum();
+            }
+            let mut val = 0;
+            for i in self.metas.iter() {
+                let v: i32 = match self.children.get((*i - 1) as usize) {
+                    Some(child) => child.total1(),
+                    _ => 0,
+                };
+                val += v;
+            }
+            val
+        }
     }
 
     fn create(num: i32, inputs: &mut Vec<i32>) -> Vec<Box<Node>> {
@@ -34,6 +49,13 @@ mod day8 {
         let tree = create(1, &mut inputs);
         //println!("{:?}", tree[0].total());
         tree[0].total()
+    }
+
+    #[allow(dead_code)]
+    pub fn part2(mut inputs: Vec<i32>) -> i32 {
+        let tree = create(1, &mut inputs);
+        //println!("{:?}", tree[0].total());
+        tree[0].total1()
     }
 }
 #[cfg(test)]
@@ -65,11 +87,21 @@ mod tests {
 
     #[test]
     fn day8_part1() {
+        // let content = &STR_INPUT.to_string();
+        // let input = parse_from_str(&content);
+        // assert_eq!(day8::part1(input), 138);
+        // let content2 = common::read_from_file("./data/day8_part1.txt").unwrap();
+        // let points2 = parse_from_str(&content2);
+        // assert_eq!(day8::part1(points2), 41028);
+    }
+
+    #[test]
+    fn day8_part2() {
         let content = &STR_INPUT.to_string();
         let input = parse_from_str(&content);
-        assert_eq!(day8::part1(input), 138);
+        assert_eq!(day8::part2(input), 66);
         let content2 = common::read_from_file("./data/day8_part1.txt").unwrap();
         let points2 = parse_from_str(&content2);
-        assert_eq!(day8::part1(points2), 41028);
+        assert_eq!(day8::part2(points2), 20849);
     }
 }
