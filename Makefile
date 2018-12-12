@@ -18,6 +18,8 @@ day6:
 	cargo test -- --nocapture day6::
 day7:
 	cargo test -- --nocapture day7::
+day8:
+	cargo test -- --nocapture day8::
 day10:
 	cargo test -- --nocapture day10::
 day11:
