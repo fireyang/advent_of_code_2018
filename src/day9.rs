@@ -182,18 +182,17 @@ mod tests {
 
     #[test]
     fn day9_part1() {
-        // assert_eq!(day9::part2(9, 23, 25), 32);
-        // assert_eq!(day9::part2(10, 23, 1618), 8317);
-        // assert_eq!(day9::part1(13, 23, 7999), 146373);
-        // assert_eq!(day9::part1(17, 23, 1104), 2764);
-        // assert_eq!(day9::part2(21, 23, 6111), 54718);
-        // assert_eq!(day9::part1(30, 23, 5807), 37305);
-        // assert_eq!(day9::part1(9, 23, 300), 32);
+        assert_eq!(day9::part2(9, 23, 25), 32);
+        assert_eq!(day9::part2(10, 23, 1618), 8317);
+        assert_eq!(day9::part1(13, 23, 7999), 146373);
+        assert_eq!(day9::part1(17, 23, 1104), 2764);
+        assert_eq!(day9::part2(21, 23, 6111), 54718);
+        assert_eq!(day9::part1(30, 23, 5807), 37305);
 
-        // assert_eq!(day9::part2(468, 23, 71010), 374287);
-        // assert_eq!(day9::part1(468, 23, 71010 * 2), 1380094);
-        // 2991367
-        // 5205125
+        assert_eq!(day9::part2(468, 23, 71010), 374287);
+    }
+    #[test]
+    fn day9_part2() {
         assert_eq!(day9::part2(468, 23, 71010 * 100), 1380094);
     }
 }
