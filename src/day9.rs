@@ -1,9 +1,12 @@
 mod day9 {
+    extern crate linked_list;
     use std::collections::HashMap;
     // use std::collections::HashSet;
     use std::rc::Rc;
     use std::rc::Weak;
     use std::cell::RefCell;
+    use linked_list::{LinkedList, Cursor};
+    use std::io::{self, prelude::*};
 
     #[derive(Debug)]
     struct Node{
@@ -160,6 +163,42 @@ mod day9 {
         // 0
     }
 
+    #[allow(dead_code)]
+    pub fn part2b(player_count: i32, multiple: i32, points: i32 ) -> usize {
+        let mut circle = LinkedList::new();
+        circle.push_back(0);
+        let num_players = player_count as usize;
+        let mut players =  vec![0; num_players];
+        let mut cur = circle.cursor();
+        let all = points as usize;
+        for marble in 1..=all{
+            if marble % 23 ==0{
+                let cur_player = (marble-1)%num_players;
+                players[cur_player] += marble;
+                seek(&mut cur, -7);
+                players[cur_player] += cur.remove().unwrap();
+            } else{
+                seek(&mut cur, 2);
+                cur.insert(marble);
+            }
+        }
+        *players.iter().max().unwrap()
+    }
+
+    fn seek<T>(cursor: &mut Cursor<T>, n: isize){
+        for _ in 0..n.abs(){
+            if n > 0 {
+                if cursor.next().is_none(){
+                    cursor.next();
+                }
+            } else{
+                if cursor.prev().is_none() {
+                    cursor.prev();
+                }
+            }
+        }
+    }
+
     fn get_pos(current: usize, len: usize, val: i32) -> usize{
         if len == 0{
             return 0;
@@ -194,5 +233,6 @@ mod tests {
     #[test]
     fn day9_part2() {
         assert_eq!(day9::part2(468, 23, 71010 * 100), 1380094);
+        // assert_eq!(day9::part2b(468, 23, 71010 * 100), 1380094);
     }
 }
