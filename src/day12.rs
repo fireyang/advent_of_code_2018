@@ -2,15 +2,17 @@ mod day12 {
     use std::collections::HashMap;
 
     #[allow(dead_code)]
-    pub fn part1(init: &str, temp: &Vec<(&str, &str)>) -> i32 {
+    pub fn part1(init: &str, temp: &Vec<(&str, &str)>, generation: i32) -> i32 {
         let mut m = HashMap::new();
         for (k, v) in temp.iter() {
-            m.entry(k).or_insert(*v);
+            if *v == "#" {
+                m.entry(k).or_insert(*v);
+            }
         }
         let mut start = init.to_string();
         let mut result = String::new();
         let mut offset = 0i32;
-        for _ in 0..20 {
+        for _i in 0..generation {
             result.clear();
             let mut s = String::with_capacity(start.len() + 8);
             offset -= 2;
@@ -29,7 +31,10 @@ mod day12 {
             let plant_offset = result.find('#').unwrap();
             offset += plant_offset as i32;
             start = result.trim_matches('.').to_string();
+            // let num = start.chars().filter(|&x| x =='#').count();
+            // println!("{:?},{:?}", i+1, num);
         }
+        // println!("{:?}",start);
         let mut val = 0;
         for (i, it) in start.chars().enumerate() {
             if it == '#' {
@@ -89,9 +94,18 @@ mod tests {
         let input = &STR_INPUT.to_string();
         let (init_state, temp) = parse_from_str(input);
         // println!("{:?}", (init_state, temp.borrow()));
-        assert_eq!(day12::part1(init_state, &temp), 325);
+        assert_eq!(day12::part1(init_state, &temp, 20), 325);
         let content = common::read_from_file("./data/day12_part1.txt").unwrap();
         let (init_state2, temp2) = parse_from_str(&content);
-        assert_eq!(day12::part1(init_state2, &temp2), 2736);
+        assert_eq!(day12::part1(init_state2, &temp2, 20), 2736);
+    }
+    #[test]
+    fn day11_part2() {
+        let content = common::read_from_file("./data/day12_part1.txt").unwrap();
+        let (init_state2, temp2) = parse_from_str(&content);
+        let pre = day12::part1(init_state2, &temp2, 124) as i64;
+        let next = day12::part1(init_state2, &temp2, 125) as i64;
+        let sum = pre + (50000000000i64 - 124) * (next - pre);
+        assert_eq!(sum, 3150000000905i64);
     }
 }
